@@ -19,7 +19,6 @@ using namespace std;
 
 // Parameters used if not available on parameter server
 static const string IMAGE_PATH_RGB = "/home/frk1pal/images/rgb.jpg";
-static const string IMAGE_PATH_DEPTH = "/home/frk1pal/images/depth.png";
 
 int main(int, char**);
 
