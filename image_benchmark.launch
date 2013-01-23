@@ -1,0 +1,24 @@
+<launch>
+	<node name="image_subscriber1" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber2" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber3" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber4" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber5" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber6" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber7" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber8" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber9" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_subscriber10" pkg="image_benchmark" type="image_subscriber_node" output="screen">
+	</node>
+	<node name="image_publisher" pkg="image_benchmark" type="image_publisher_node" output="screen">
+	</node>
+</launch>
