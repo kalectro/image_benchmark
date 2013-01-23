@@ -15,12 +15,12 @@ int main(int argc, char **argv)
 	ros::Time stop;
 	//ros::Publisher features_pub = nh.advertise<cv::Mat>("/image_benchmark/features", 10000);
 	vector<KeyPoint> keypoints;
-	vector<KeyPoint> keypoints2;
 	initModule_nonfree(); // Init nonfree feature detection
 
 	// Give advertise some time
 	sleep(1);
-
+	
+	// initialize OpenCV images and descriptors
 	cv::Mat cv_image;
 	cv::Mat descriptors;
 
@@ -36,20 +36,18 @@ int main(int argc, char **argv)
 	{
 		// start timer
 		start = ros::Time::now();
-		//for(int i=0;i<30;++i)
-		//{
-			getFeatures(cv_image,keypoints,descriptors, "SURF");
-			//features_pub.publish(keypoints);
-			cout << "found so many descriptors " << keypoints.size() << '\n';
-		//}
+		// find features using method SURF. Bad hard coding
+		getFeatures(cv_image,keypoints,descriptors, "SURF");
+		// stop the timer
 		stop = ros::Time::now();
-		ROS_DEBUG("It took %llu milliseconds for 1 images",(stop.toNSec()-start.toNSec())/1000000);
+		// nice debug output to show the computing time
+		ROS_DEBUG("It took %llu milliseconds for 1 image",(stop.toNSec()-start.toNSec())/1000000);
+		// just output the number for easy copy/paste
 		cout << (stop.toNSec()-start.toNSec())/1000000 <<'\n';
-		sleep(0.5);
 	}
 }
 
-
+// This function uses the OpenCV library to find features in an image
 void getFeatures(const Mat& img, vector<KeyPoint>& keypoints, Mat& descriptors,
                              const string& detectorType)
 {
