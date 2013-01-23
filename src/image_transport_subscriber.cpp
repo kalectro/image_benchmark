@@ -13,7 +13,7 @@ bool reset;
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "ImageTransportSubscriber");
+  ros::init(argc, argv, "image_transport_subscriber");
   image_transport_subscriber its;
   reset=true;
   ROS_INFO("waiting for 30 images");

@@ -16,9 +16,8 @@
 #include <image_transport/image_transport.h>
 
 using namespace std;
-
 // Parameters used if not available on parameter server
-static const string IMAGE_PATH_RGB = "/home/frk1pal/images/rgb.jpg";
+static const string IMAGE_PATH = "/images/rgb.jpg";
 
 int main(int, char**);
 

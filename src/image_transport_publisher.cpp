@@ -14,17 +14,30 @@ int main(int argc, char** argv)
 	// Give advertise some time
 	sleep(1);
 
+	// get parameters from server
+	string image_path;
+	if (nh.getParam("/image_transport_publisher/image_path", image_path))
+	{
+		ROS_INFO("Found image path %s on server", image_path.c_str());
+	}
+	else
+	{
+		image_path = IMAGE_PATH;
+		ROS_INFO("Found no image path on server, using default %s", image_path.c_str());
+	}
+
 	// Load images
 	cv_bridge::CvImagePtr cv_ptr(new cv_bridge::CvImage);
 
 	cv::Mat cv_image;
 
 	ROS_INFO("loading pictures");
-	cv_image  = cv::imread(IMAGE_PATH_RGB, 1); // Read RGB image
+	cv_image  = cv::imread(image_path, 1); // Read RGB image
 
 	if (!cv_image.data)
 	{
-		ROS_ERROR("Could not open or find images, check image_publisher.h for file paths");
+		ROS_ERROR("Could not open or find images, check image_publisher.h for file paths or set Parameter image_path");
+		nh.shutdown();
 	}
 
 	cv_ptr->image = cv_image;

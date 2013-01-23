@@ -20,12 +20,24 @@ int main(int argc, char **argv)
 	// Give advertise some time
 	sleep(1);
 	
+	// get parameters from server
+	string image_path;
+	if (nh.getParam("/feature_detection/image_path", image_path))
+	{
+		ROS_INFO("Found image path %s on server", image_path.c_str());
+	}
+	else
+	{
+		image_path = IMAGE_PATH;
+		ROS_INFO("Found no image path on server, using default %s", image_path.c_str());
+	}
+
 	// initialize OpenCV images and descriptors
 	cv::Mat cv_image;
 	cv::Mat descriptors;
 
 	ROS_INFO("loading pictures");
-	cv_image  = cv::imread(IMAGE_PATH_RGB, 1); // Read RGB image
+	cv_image  = cv::imread(image_path, 1); // Read RGB image
 
 	if (!cv_image.data)
 	{
