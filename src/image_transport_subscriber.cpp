@@ -53,17 +53,15 @@ void image_transport_subscriber::imageCb(const sensor_msgs::ImageConstPtr& imgMs
 		return;
 	}
 	ROS_DEBUG("Received Image %u",imgMsgPtr->header.seq);
-	// Display image
-	// cv::imshow("subscriber", cv_ptr->image);
-	// cvWaitKey(100);
+	
 	if(++img_counter >=30)
 	{
 		stop = ros::Time::now();
 		img_counter = 0;
 		reset = true;
-		//ROS_INFO("Received 30 images within %llu milliseconds", (stop.toNSec() -start.toNSec())/1000000);
+		ROS_DEBUG("Received 30 images within %llu milliseconds", (stop.toNSec() -start.toNSec())/1000000);
+		// output Milliseconds for easy dopy/paste
 		cout << (stop.toNSec() -start.toNSec())/1000000 << '\n';
-		//ros::shutdown();
 	}
 }
 
