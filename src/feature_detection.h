@@ -21,7 +21,7 @@ using namespace std;
 using namespace cv;
 
 // Parameters used if not available on parameter server
-static const string IMAGE_PATH = "/images/rgb.jpg";
+static const string IMAGE_PATH = "src/image_benchmark/images/rgb.jpg";
 
   // Determine the feature points and their descriptors with one defined method, e.g. "SURF". The second channel is used,
   // if the input image contains several channels.
