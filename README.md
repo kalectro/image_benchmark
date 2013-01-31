@@ -1,4 +1,4 @@
 image_benchmark
 ===============
 
-simple benchmark system performance for transmitting and receiving pictures and detecting features
+simple benchmark system performance for benchmarking image tranmission and feature detection for ROS (catkin)
