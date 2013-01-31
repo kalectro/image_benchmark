@@ -12,6 +12,7 @@ int main(int argc, char **argv)
 {
   	ros::init(argc, argv, "feature_detection");
 	ros::NodeHandle nh;
+	// variables for timing
 	ros::Time start;
 	ros::Time stop;
 	string detector_type;
@@ -19,7 +20,8 @@ int main(int argc, char **argv)
 	string image_path;
 	//ros::Publisher features_pub = nh.advertise<cv::Mat>("/image_benchmark/features", 10000);
 	vector<KeyPoint> keypoints;
-	initModule_nonfree(); // Init nonfree feature detection
+	// Init nonfree feature detection from OpenCV2
+	initModule_nonfree(); 
 
 	// get parameters from server
 	// get image path
@@ -58,20 +60,20 @@ int main(int argc, char **argv)
 		nh.shutdown();
 	}
 
+	// construct feature detector and descriptor extractor
 	Ptr<FeatureDetector> detector = FeatureDetector::create(detector_type);
 	Ptr<DescriptorExtractor> extractor = DescriptorExtractor::create(extractor_type);
 
+	// set the header line for a cvs output seperated by ;
 	cout << "detection[ms];keypoints;detector;extraction;keypoints;image path;extractor\n";
 
-
-	ROS_DEBUG("time[ms];keypoints;image path;detector type");
 	//while (nh.ok())
 	for (int i=0;i<10;++i)
 	{	
 		// start timer
 		start = ros::Time::now();
 		// Detect feature points
-   	detector->detect(cv_image, keypoints);
+		detector->detect(cv_image, keypoints);
 		// stop the timer
 		stop = ros::Time::now();
 		// output time for detector
@@ -79,8 +81,8 @@ int main(int argc, char **argv)
 
 		// start timer
 		start = ros::Time::now();
-   	// Get descriptors for keypoints
-   	extractor->compute(cv_image, keypoints, descriptors);
+		// Get descriptors for keypoints
+		extractor->compute(cv_image, keypoints, descriptors);
 		// stop the timer
 		stop = ros::Time::now();
 		// nice debug output to show the computing time
