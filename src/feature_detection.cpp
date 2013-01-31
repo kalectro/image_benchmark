@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 	cout << "detection[ms];keypoints;detector;extraction;keypoints;image path;extractor\n";
 
 	//while (nh.ok())
-	for (int i=0;i<10;++i)
+	for (int i=0;i<2;++i)
 	{	
 		// start timer
 		start = ros::Time::now();
