@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	string extractor_type;
 	string image_path;
 	bool verbosity;
-	unsigned int repetitions;
+	int repetitions;
 	//ros::Publisher features_pub = nh.advertise<cv::Mat>("/image_benchmark/features", 10000);
 	vector<KeyPoint> keypoints;
 	// Init nonfree feature detection from OpenCV2
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 	nh.param<bool>("/feature_detection/verbosity", verbosity, false);
 	
 	// get number of repetitions
-	nh.param<unsigned int>("/feature_detection/repetitions", repetitions, 3);
+	nh.param<int>("/feature_detection/repetitions", repetitions, 3);
 		
 	// initialize OpenCV images and descriptors
 	cv::Mat cv_image;
