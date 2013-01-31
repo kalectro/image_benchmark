@@ -18,6 +18,8 @@ int main(int argc, char **argv)
 	string detector_type;
 	string extractor_type;
 	string image_path;
+	bool verbosity;
+	unsigned int repetitions;
 	//ros::Publisher features_pub = nh.advertise<cv::Mat>("/image_benchmark/features", 10000);
 	vector<KeyPoint> keypoints;
 	// Init nonfree feature detection from OpenCV2
@@ -36,15 +38,21 @@ int main(int argc, char **argv)
 	}
 
 	// get feature detector type
-	nh.param<std::string>("/feature_detection/detector_type", detector_type, "SIFT");
+	nh.param<std::string>("/feature_detection/detector_type", detector_type, "FAST");
 	if (!(detector_type == "SURF" || detector_type == "SIFT" || detector_type == "ORB" ||detector_type == "BRISK" ||detector_type == "FAST"))
 		ROS_INFO_ONCE("The selected detector type has not been tested yet, expect a segmentation error");
 
 	// get feature extractor type
-	nh.param<std::string>("/feature_detection/extractor_type", extractor_type, "SIFT");
+	nh.param<std::string>("/feature_detection/extractor_type", extractor_type, "BRISK");
 	if (!(extractor_type == "SURF" || extractor_type == "SIFT" || extractor_type == "ORB" || extractor_type == "BRISK" || extractor_type == "FREAK"))
 		ROS_INFO_ONCE("The selected detector type has not been tested yet, expect a segmentation error");
+		
+	// get verbosity for csv output
+	nh.param<bool>("/feature_detection/verbosity", verbosity, false);
 	
+	// get number of repetitions
+	nh.param<unsigned int>("/feature_detection/repetitions", repetitions, 3);
+		
 	// initialize OpenCV images and descriptors
 	cv::Mat cv_image;
 	cv::Mat descriptors;
@@ -64,11 +72,12 @@ int main(int argc, char **argv)
 	Ptr<FeatureDetector> detector = FeatureDetector::create(detector_type);
 	Ptr<DescriptorExtractor> extractor = DescriptorExtractor::create(extractor_type);
 
-	// set the header line for a cvs output seperated by ;
-	cout << "detection[ms];keypoints;detector;extraction;keypoints;image path;extractor\n";
+	// set the header line for a cvs output seperated by ; if verbose
+	if(verbosity)
+		cout << "detection[ms];keypoints;detector;extraction;keypoints;image path;extractor\n";
 
 	//while (nh.ok())
-	for (int i=0;i<2;++i)
+	for (int i=0;i<repetitions;++i)
 	{	
 		// start timer
 		start = ros::Time::now();
