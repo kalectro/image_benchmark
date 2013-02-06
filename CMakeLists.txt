@@ -13,8 +13,10 @@ catkin_package(
 add_executable(image_transport_publisher_node src/image_transport_publisher.cpp)
 add_executable(image_transport_subscriber_node src/image_transport_subscriber.cpp)
 add_executable(feature_detection_node src/feature_detection.cpp)
+add_executable(rosinit_benchmark_node src/rosinit_benchmark.cpp)
 
 target_link_libraries(image_transport_publisher_node ${catkin_LIBRARIES})
 target_link_libraries(image_transport_subscriber_node ${catkin_LIBRARIES})
 target_link_libraries(feature_detection_node ${catkin_LIBRARIES})
+target_link_libraries(rosinit_benchmark_node ${catkin_LIBRARIES})
 

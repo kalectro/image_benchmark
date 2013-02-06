@@ -1,5 +1,5 @@
 : ${1?"Usage: $0 /path/to/image.jpg"}
-filename=benchmark_results
+filename=benchmark_feature_detection
 i=0
 verbose=true;
 while true
