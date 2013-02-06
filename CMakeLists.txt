@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(image_benchmark)
 
-find_package(catkin REQUIRED COMPONENTS cv_bridge image_transport opencv2 std_msgs rospy roscpp)
+find_package(catkin REQUIRED COMPONENTS cv_bridge image_transport std_msgs rospy roscpp)
 
 catkin_package(
 #  INCLUDE_DIRS include
   LIBRARIES image_publisher image_subscriber
-  CATKIN_DEPENDS cv_bridge image_transport opencv2 std_msgs rospy roscpp
+  CATKIN_DEPENDS cv_bridge image_transport std_msgs rospy roscpp
   DEPENDS system_lib
 )
 
